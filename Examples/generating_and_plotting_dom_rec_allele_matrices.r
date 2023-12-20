@@ -71,9 +71,10 @@ time_start <- Sys.time()
 print(time_start)
 max_allele_matrix_by_ind=parallel::mclapply(
   unique(metaData$individual),
-  get_max_by_sample(GTEX_allelecounts_A = GTEX_allelecounts_A,
-                    GTEX_allelecounts_B = GTEX_allelecounts_B,
-                    metaData = metaData),
+  get_max_by_sample,
+  metaData = metaData,
+  GTEX_allelecounts_A = GTEX_allelecounts_A,
+  GTEX_allelecounts_B = GTEX_allelecounts_B,
   mc.cores = cores_)
 time_end <- Sys.time()
 print(time_end - time_start)
@@ -92,9 +93,10 @@ time_start <- Sys.time()
 print(time_start)
 min_allele_matrix_by_ind=parallel::mclapply(
   unique(metaData$individual),
-  get_min_by_sample(GTEX_allelecounts_A = GTEX_allelecounts_A,
-                    GTEX_allelecounts_B = GTEX_allelecounts_B,
-                    metaData = metaData),
+  get_min_by_sample,
+  metaData = metaData,
+  GTEX_allelecounts_A = GTEX_allelecounts_A,
+  GTEX_allelecounts_B = GTEX_allelecounts_B,
   mc.cores = cores_)
 time_end <- Sys.time()
 print(time_end - time_start)
@@ -108,7 +110,7 @@ for (i in 1:length(min_allele_matrix_by_ind)){
   }
 }
 
-write_rds(x = GTEX_counts_reduced_max, file = "min_allele_matrix_by_ind.rds")
+write_rds(x = GTEX_counts_reduced_min, file = "min_allele_matrix_by_ind.rds")
 
 
 ## let's plot an example to see where we are

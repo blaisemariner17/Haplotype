@@ -3,9 +3,9 @@
 #' @param samples_oi_A dataframe of allele A counts to be passed in
 #' @param samples_oi_B dataframe of allele B counts to be passed in
 #' @return Function returns matrix.
-#' @export return_res_allele_matrix
+#' @export return_rec_allele_matrix
 
-return_res_allele_matrix <- function(samples_oi_A, samples_oi_B){
+return_rec_allele_matrix <- function(samples_oi_A, samples_oi_B){
   for (i in 1:nrow(samples_oi_A)){
 
     samples_oi_min <- samples_oi_A
