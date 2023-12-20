@@ -10,8 +10,6 @@ return_dom_allele_matrix(samples_oi_A, samples_oi_B)
 \item{samples_oi_A}{dataframe of allele A counts to be passed in}
 
 \item{samples_oi_B}{dataframe of allele B counts to be passed in}
-
-\item{group_names}{groupnames of the data}
 }
 \value{
 Function returns matrix.

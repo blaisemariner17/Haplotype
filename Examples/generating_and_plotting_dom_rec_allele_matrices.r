@@ -1,4 +1,4 @@
-#### This is a script that is used to generate the data and interpretations from GTEx haplotype matrix in Mariner et al 2023
+#### This is a script that is used to generate the data and interpretations from GTEx haplotype matrix in Mariner et al 2024
 # all questions should be directed towards blaisemariner17@gmail.com
 
 # this sets the working directory to this script's path
@@ -78,11 +78,11 @@ max_allele_matrix_by_ind=parallel::mclapply(
 time_end <- Sys.time()
 print(time_end - time_start)
 
-for (i in 1:ncol(max_allele_matrix_by_ind)){
+for (i in 1:length(max_allele_matrix_by_ind)){
   if (i == 1) {
     GTEX_counts_reduced_max <- max_allele_matrix_by_ind[[1]]
   } else {
-    GTEX_counts_reduced_max <- cbind(res, max_allele_matrix_by_ind)
+    GTEX_counts_reduced_max <- cbind(GTEX_counts_reduced_max, max_allele_matrix_by_ind[[i]])
   }
 }
 
@@ -99,11 +99,12 @@ min_allele_matrix_by_ind=parallel::mclapply(
 time_end <- Sys.time()
 print(time_end - time_start)
 
-for (i in 1:ncol(min_allele_matrix_by_ind)){
+
+for (i in 1:length(min_allele_matrix_by_ind)){
   if (i == 1) {
-    GTEX_counts_reduced_max <- min_allele_matrix_by_ind[[1]]
+    GTEX_counts_reduced_min <- max_allele_matrix_by_ind[[1]]
   } else {
-    GTEX_counts_reduced_max <- cbind(res, min_allele_matrix_by_ind)
+    GTEX_counts_reduced_min <- cbind(GTEX_counts_reduced_min, max_allele_matrix_by_ind[[i]])
   }
 }
 
