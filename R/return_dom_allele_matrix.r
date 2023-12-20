@@ -6,9 +6,9 @@
 #' @export return_dom_allele_matrix
 
 return_dom_allele_matrix <- function(samples_oi_A, samples_oi_B){
-  for (i in 1:nrow(samples_oi_A)){
+  samples_oi_max <- samples_oi_A
 
-    samples_oi_max <- samples_oi_A
+  for (i in 1:nrow(samples_oi_A)){
 
     list_ = list()
     list_[[1]] <- rowSums(samples_oi_A[i,])

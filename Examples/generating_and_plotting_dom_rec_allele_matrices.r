@@ -88,29 +88,35 @@ for (i in 1:length(max_allele_matrix_by_ind)){
 }
 
 write_rds(x = GTEX_counts_reduced_max, file = "max_allele_matrix_by_ind.rds")
-
-time_start <- Sys.time()
-print(time_start)
-min_allele_matrix_by_ind=parallel::mclapply(
-  unique(metaData$individual),
-  get_min_by_sample,
-  metaData = metaData,
-  GTEX_allelecounts_A = GTEX_allelecounts_A,
-  GTEX_allelecounts_B = GTEX_allelecounts_B,
-  mc.cores = cores_)
-time_end <- Sys.time()
-print(time_end - time_start)
-
-
-for (i in 1:length(min_allele_matrix_by_ind)){
-  if (i == 1) {
-    GTEX_counts_reduced_min <- max_allele_matrix_by_ind[[1]]
-  } else {
-    GTEX_counts_reduced_min <- cbind(GTEX_counts_reduced_min, max_allele_matrix_by_ind[[i]])
-  }
-}
-
+GTEX_counts_reduced <- GTEX_counts_reduced[,colnames(GTEX_counts_reduced) %in% colnames(GTEX_counts_reduced_max)]
+all(colnames(GTEX_counts_reduced) == colnames(GTEX_counts_reduced_max))
+all(rownames(GTEX_counts_reduced) == rownames(GTEX_counts_reduced_max))
+GTEX_counts_reduced_min <- GTEX_counts_reduced - GTEX_counts_reduced_max
 write_rds(x = GTEX_counts_reduced_min, file = "min_allele_matrix_by_ind.rds")
+
+## or you can do it the long way
+# time_start <- Sys.time()
+# print(time_start)
+# min_allele_matrix_by_ind=parallel::mclapply(
+#   unique(metaData$individual),
+#   get_min_by_sample,
+#   metaData = metaData,
+#   GTEX_allelecounts_A = GTEX_allelecounts_A,
+#   GTEX_allelecounts_B = GTEX_allelecounts_B,
+#   mc.cores = cores_)
+# time_end <- Sys.time()
+# print(time_end - time_start)
+#
+#
+# for (i in 1:length(min_allele_matrix_by_ind)){
+#   if (i == 1) {
+#     GTEX_counts_reduced_min <- max_allele_matrix_by_ind[[1]]
+#   } else {
+#     GTEX_counts_reduced_min <- cbind(GTEX_counts_reduced_min, max_allele_matrix_by_ind[[i]])
+#   }
+# }
+#
+# write_rds(x = GTEX_counts_reduced_min, file = "min_allele_matrix_by_ind.rds")
 
 
 ## let's plot an example to see where we are
