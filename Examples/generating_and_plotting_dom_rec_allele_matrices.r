@@ -115,7 +115,6 @@ write_rds(x = GTEX_counts_reduced_min, file = "min_allele_matrix_by_ind.rds")
 
 ## let's plot an example to see where we are
 
-
 gene <- "ENSG00000090857"
 organ <- "Adipose Tissue"
 reads_A <- GTEX_allelecounts_A[grepl(gene, rownames(GTEX_allelecounts_A)),]
