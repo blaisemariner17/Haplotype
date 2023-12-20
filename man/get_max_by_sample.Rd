@@ -6,12 +6,15 @@
 \usage{
 get_max_by_sample(
   ind,
+  metaData = metaData,
   GTEX_allelecounts_A = GTEX_allelecounts_A,
   GTEX_allelecounts_B = GTEX_allelecounts_B
 )
 }
 \arguments{
 \item{ind}{individuals of interest}
+
+\item{metaData}{the metadata which tells us which individuals belong to which columns in the allele data}
 
 \item{GTEX_allelecounts_A}{allelecounts A}
 

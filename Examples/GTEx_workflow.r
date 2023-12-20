@@ -64,5 +64,26 @@ metaData <- metaData[rownames(metaData) %in% colnames(GTEX_counts_reduced),]
 #### Now we can start working with the data
 library("Haplotype")
 
+time_start <- Sys.time()
+print(time_start)
+max_allele_matrix_by_ind=parallel::mclapply(
+  unique(metaData$individual),
+  get_max_by_sample(GTEX_allelecounts_A = GTEX_allelecounts_A,
+                    GTEX_allelecounts_B = GTEX_allelecounts_B,
+                    metaData = metaData),
+  mc.cores = cores_)
+time_end <- Sys.time()
+print(time_end - time_start)
+
+time_start <- Sys.time()
+print(time_start)
+min_allele_matrix_by_ind=parallel::mclapply(
+  unique(metaData$individual),
+  get_min_by_sample(GTEX_allelecounts_A = GTEX_allelecounts_A,
+                    GTEX_allelecounts_B = GTEX_allelecounts_B,
+                    metaData = metaData),
+  mc.cores = cores_)
+time_end <- Sys.time()
+print(time_end - time_start)
 
 
