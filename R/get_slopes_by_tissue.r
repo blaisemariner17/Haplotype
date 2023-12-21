@@ -36,7 +36,7 @@ get_slopes_by_tissue <- function(index, list_gtex_max = list_gtex_max, list_gtex
         metaData_oi <- metaData[metaData$tissue == tissue, ]
 
         plotting_ <- plotting[rownames(plotting) %in% samples_oi,]
-        if (nrow(na.omit(plotting_)) > 0){
+        if (nrow(na.omit(plotting_)) > 50){
           n = nrow(plotting_)
           lm_ <- lm(reads_allele_min~reads_allele_max,data=plotting_)
           cef <- coef(lm_)
